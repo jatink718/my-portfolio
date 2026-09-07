@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destroyer Menswear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg-dark: #15181B;
+    --bg-dark2: #1C2125;
+    --bg-light: #EFEAE0;
+    --panel-light: #F8F5EE;
+    --ink: #17181A;
+    --ink-onlight-soft: #57534A;
+    --ink-ondark: #F2F0E9;
+    --ink-ondark-soft: #9B9F9F;
+    --accent: #F0B429;
+    --accent-ink: #2A1F02;
+    --rust: #B4472E;
+    --line-dark: #2B3034;
+    --line-light: #D8D1BE;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  body{
+    margin:0;
+    background: var(--bg-light);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16.5px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color:inherit; }
+  img, svg{ display:block; max-width:100%; }
+  .wrap{ max-width: 1180px; margin:0 auto; padding: 0 40px; }
+
+  .display{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    letter-spacing: 0.005em;
+  }
+  .stencil{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------------- Header ---------------- */
+
+  header{
+    position:sticky; top:0; z-index:30;
+    background: color-mix(in srgb, var(--bg-dark) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--ink-ondark);
+  }
+  .header-row{
+    display:flex; align-items:center; justify-content:space-between;
+    height: 68px;
+  }
+  .brand{
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    font-size: 21px;
+    letter-spacing: 0.06em;
+    text-decoration:none;
+    color: var(--ink-ondark);
+  }
+  .brand span{ color: var(--accent); }
+  nav{ display:flex; align-items:center; gap: 30px; }
+  nav a{
+    text-decoration:none;
+    font-size: 14px;
+    color: var(--ink-ondark-soft);
+    transition: color .15s ease;
+  }
+  nav a:hover, nav a:focus-visible{ color: var(--ink-ondark); }
+  .nav-cta{
+    background: var(--accent);
+    color: var(--accent-ink) !important;
+    padding: 9px 16px;
+    font-weight:600;
+    font-size: 13.5px !important;
+  }
+  .nav-cta:hover{ background:#FFC94D; }
+  .menu-btn{
+    display:none;
+    background:none; border:none; color:var(--ink-ondark);
+    font-size: 22px; cursor:pointer; padding: 4px 8px;
+  }
+
+  /* ---------------- Hero ---------------- */
+
+  .hero{
+    background: var(--bg-dark);
+    color: var(--ink-ondark);
+    padding: 96px 0 84px;
+    position: relative;
+    overflow:hidden;
+    border-bottom: 4px solid var(--accent);
+  }
+  .hero-grain{
+    position:absolute; inset:0;
+    background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, transparent 1px, transparent 3px);
+    pointer-events:none;
+  }
+  .hero-inner{ position:relative; }
+  .hero-tag{
+    display:inline-block;
+    color: var(--accent);
+    margin-bottom: 22px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .hero h1{
+    font-size: clamp(42px, 7vw, 88px);
+    line-height: 0.98;
+    margin: 0 0 26px;
+    max-width: 14ch;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise .7s ease forwards .1s;
+  }
+  @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+  .hero p.lede{
+    max-width: 46ch;
+    color: var(--ink-ondark-soft);
+    font-size: 18px;
+    margin: 0 0 36px;
+  }
+  .hero-actions{ display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding: 15px 26px;
+    font-family:'Oswald', sans-serif;
+    font-weight:600; font-size:15px; letter-spacing:0.03em;
+    text-decoration:none;
+    border: 1px solid transparent;
+    transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .btn-primary{ background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover{ background:#FFC94D; transform: translateY(-1px); }
+  .btn-ghost{ border-color: var(--line-dark); color: var(--ink-ondark); }
+  .btn-ghost:hover{ border-color: var(--ink-ondark-soft); }
+
+  .hero-stats{
+    display:flex; gap: 40px; margin-top: 64px;
+    padding-top: 28px; border-top: 1px solid var(--line-dark);
+    flex-wrap: wrap;
+  }
+  .hero-stats div .n{ font-family:'Oswald',sans-serif; font-size: 26px; color:var(--ink-ondark); }
+  .hero-stats div .l{ font-size: 12.5px; color: var(--ink-ondark-soft); margin-top:2px; }
+
+  /* ---------------- Section scaffolding ---------------- */
+
+  section{ padding: 92px 0; }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom: 48px; gap: 20px; flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-size: 34px; margin:0;
+  }
+  .section-head .stencil{ color: var(--ink-onlight-soft); }
+
+  /* ---------------- Products ---------------- */
+
+  #products{ background: var(--bg-light); }
+  .product-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .card{
+    background: var(--panel-light);
+    border: 1px solid var(--line-light);
+    display:flex; flex-direction:column;
+  }
+  .card-media{
+    aspect-ratio: 4/5;
+    background: #E4DFCF;
+    position:relative;
+    border-bottom: 1px solid var(--line-light);
+    overflow:hidden;
+  }
+  .card-media svg{ width:100%; height:100%; }
+  .tag-no{
+    position:absolute; top:12px; left:12px;
+    background: var(--bg-dark); color: var(--accent);
+    padding: 4px 8px;
+  }
+  .card-body{ padding: 20px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .card-body h3{ font-size:19px; margin:0; font-weight:600; font-family:'Oswald',sans-serif; letter-spacing:0.01em; }
+  .card-meta{
+    display:flex; justify-content:space-between; align-items:center;
+    color: var(--ink-onlight-soft);
+  }
+  .card-price{ font-family:'Oswald',sans-serif; font-size:17px; color:var(--ink); }
+  .card-cta{
+    margin-top: auto;
+    display:flex; align-items:center; justify-content:space-between;
+    text-decoration:none;
+    border-top: 1px solid var(--line-light);
+    padding-top: 14px;
+    font-size: 14px; font-weight:600;
+    color: var(--ink);
+  }
+  .card-cta:hover{ color: var(--rust); }
+  .card-cta .arrow{ transition: transform .15s ease; }
+  .card-cta:hover .arrow{ transform: translateX(3px); }
+
+  /* ---------------- Reviews ---------------- */
+
+  #reviews{
+    background: var(--bg-dark2);
+    color: var(--ink-ondark);
+  }
+  #reviews .section-head h2{ color: var(--ink-ondark); }
+  #reviews .section-head .stencil{ color: var(--ink-ondark-soft); }
+  .review-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .review-card{
+    background: var(--bg-dark);
+    border: 1px dashed #3A4046;
+    padding: 26px 24px;
+  }
+  .stars{ color: var(--accent); letter-spacing: 2px; font-size: 15px; margin-bottom:14px; }
+  .review-card p.quote{
+    margin: 0 0 20px;
+    color: var(--ink-ondark);
+    font-size: 15.5px;
+  }
+  .review-who{ display:flex; justify-content:space-between; align-items:center; }
+  .review-who .name{ font-weight:600; font-size:14px; }
+  .review-who .loc{ font-size: 12.5px; color: var(--ink-ondark-soft); }
+
+  /* ---------------- Contact ---------------- */
+
+  #contact{ background: var(--bg-light); }
+  .contact-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items:start;
+  }
+  .contact-info h2{ font-size: 36px; margin: 0 0 20px; max-width: 12ch; }
+  .contact-info p.lede{ color: var(--ink-onlight-soft); max-width: 42ch; margin: 0 0 32px; }
+  .info-row{
+    display:flex; gap: 16px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line-light);
+  }
+  .info-row:last-of-type{ border-bottom: 1px solid var(--line-light); }
+  .info-row .k{
+    width: 90px; flex-shrink:0;
+    color: var(--ink-onlight-soft);
+    font-size: 13px;
+  }
+  .info-row .v a{ text-decoration:none; border-bottom:1px solid var(--ink); }
+  .info-row .v a:hover{ color: var(--rust); border-color: var(--rust); }
+
+  .map-box{
+    background: var(--panel-light);
+    border: 1px solid var(--line-light);
+    aspect-ratio: 4/3.4;
+  }
+  .map-box svg{ width:100%; height:100%; }
+
+  /* ---------------- Footer ---------------- */
+
+  footer{
+    background: var(--bg-dark);
+    color: var(--ink-ondark-soft);
+    padding: 40px 0;
+  }
+  .foot-row{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size: 13px; flex-wrap:wrap; gap: 12px;
+  }
+  .foot-row a{ text-decoration:none; color: var(--ink-ondark-soft); margin-left:18px; }
+  .foot-row a:hover{ color: var(--ink-ondark); }
+
+  /* ---------------- Responsive ---------------- */
+
+  @media (max-width: 900px){
+    .wrap{ padding: 0 22px; }
+    .product-grid{ grid-template-columns: repeat(2, 1fr); }
+    .review-grid{ grid-template-columns: 1fr; }
+    .contact-grid{ grid-template-columns: 1fr; }
+    .hero{ padding: 64px 0 56px; }
+    section{ padding: 64px 0; }
+  }
+  @media (max-width: 720px){
+    nav{
+      position: fixed; top:68px; left:0; right:0;
+      background: var(--bg-dark);
+      border-bottom: 1px solid var(--line-dark);
+      flex-direction:column; align-items:flex-start;
+      padding: 18px 22px 26px;
+      gap: 18px;
+      display:none;
+    }
+    nav.open{ display:flex; }
+    .menu-btn{ display:block; }
+    .product-grid{ grid-template-columns: 1fr; }
+    .hero-stats{ gap:28px; }
+  }
+
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-row">
+    <a class="brand" href="#top">DESTROYER<span>.</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <nav id="siteNav">
+      <a href="#products">Shop</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-grain"></div>
+    <div class="wrap hero-inner">
+      <span class="hero-tag stencil">DESTROYER MENSWEAR &mdash; EST. 2019</span>
+      <h1 class="display">Built for the street. Made to outlast it.</h1>
+      <p class="lede">Heavyweight cottons, honest construction, no wasted stitches. Destroyer makes the pieces that go with you every day — not just the ones that photograph well.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#products">View Products</a>
+        <a class="btn btn-ghost" href="#contact">Visit the store</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="n display">6</div><div class="l stencil">CORE STYLES</div></div>
+        <div><div class="n display">400+</div><div class="l stencil">GSM COTTON</div></div>
+        <div><div class="n display">4.8</div><div class="l stencil">AVG RATING</div></div>
+        <div><div class="n display">2019</div><div class="l stencil">SINCE</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="display">View Products</h2>
+        <span class="stencil">CURRENT DROP &mdash; 06 PIECES</span>
+      </div>
+
+      <div class="product-grid">
+
+        <div class="card">
+          <div class="card-media">
+            <span class="tag-no stencil">NO. 001</span>
+            <svg viewBox="0 0 300 375" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="375" fill="#E4DFCF"/>
+              <path d="M95 60 L120 40 L150 55 L180 40 L205 60 L230 95 L200 118 L188 100 L188 320 L112 320 L112 100 L100 118 L70 95 Z"
+                fill="none" stroke="#17181A" stroke-width="3" stroke-linejoin="round"/>
+              <line x1="150" y1="55" x2="150" y2="90" stroke="#17181A" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3>Heavy Cotton Overshirt</h3>
+            <div class="card-meta"><span class="stencil">S &ndash; XXL</span><span class="card-price">&#8377;2,499</span></div>
+            <a class="card-cta" href="mailto:info@destroyermenswear.com?subject=Enquiry%3A%20Heavy%20Cotton%20Overshirt">Enquire <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-media">
+            <span class="tag-no stencil">NO. 002</span>
+            <svg viewBox="0 0 300 375" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="375" fill="#E4DFCF"/>
+              <path d="M110 70 L190 70 L200 110 L185 320 L200 340 L100 340 L115 320 L100 110 Z" fill="none" stroke="#17181A" stroke-width="3" stroke-linejoin="round"/>
+              <line x1="150" y1="70" x2="150" y2="340" stroke="#17181A" stroke-width="1.4" stroke-dasharray="4 5"/>
+              <rect x="118" y="150" width="22" height="26" fill="none" stroke="#17181A" stroke-width="2"/>
+              <rect x="160" y="150" width="22" height="26" fill="none" stroke="#17181A" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3>Cargo Utility Pants</h3>
+            <div class="card-meta"><span class="stencil">28 &ndash; 38</span><span class="card-price">&#8377;2,899</span></div>
+            <a class="card-cta" href="mailto:info@destroyermenswear.com?subject=Enquiry%3A%20Cargo%20Utility%20Pants">Enquire <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-media">
+            <span class="tag-no stencil">NO. 003</span>
+            <svg viewBox="0 0 300 375" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="375" fill="#E4DFCF"/>
+              <path d="M90 65 L118 45 L150 58 L182 45 L210 65 L238 100 L206 124 L192 105 L192 300 L108 300 L108 105 L94 124 L62 100 Z"
+                fill="none" stroke="#17181A" stroke-width="3" stroke-linejoin="round"/>
+              <rect x="120" y="150" width="60" height="4" fill="#B4472E"/>
+              <rect x="120" y="164" width="60" height="4" fill="#B4472E"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3>Oxide Bomber Jacket</h3>
+            <div class="card-meta"><span class="stencil">S &ndash; XL</span><span class="card-price">&#8377;4,999</span></div>
+            <a class="card-cta" href="mailto:info@destroyermenswear.com?subject=Enquiry%3A%20Oxide%20Bomber%20Jacket">Enquire <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-media">
+            <span class="tag-no stencil">NO. 004</span>
+            <svg viewBox="0 0 300 375" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="375" fill="#E4DFCF"/>
+              <path d="M100 70 L130 55 L150 65 L170 55 L200 70 L215 100 L195 115 L188 102 L188 290 L112 290 L112 102 L105 115 L85 100 Z"
+                fill="none" stroke="#17181A" stroke-width="3" stroke-linejoin="round"/>
+              <circle cx="150" cy="140" r="14" fill="none" stroke="#17181A" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3>Ribbed Crewneck</h3>
+            <div class="card-meta"><span class="stencil">S &ndash; XXL</span><span class="card-price">&#8377;1,699</span></div>
+            <a class="card-cta" href="mailto:info@destroyermenswear.com?subject=Enquiry%3A%20Ribbed%20Crewneck">Enquire <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-media">
+            <span class="tag-no stencil">NO. 005</span>
+            <svg viewBox="0 0 300 375" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="375" fill="#E4DFCF"/>
+              <path d="M95 60 L120 40 L150 55 L180 40 L205 60 L230 95 L200 118 L188 100 L188 320 L112 320 L112 100 L100 118 L70 95 Z"
+                fill="none" stroke="#17181A" stroke-width="3" stroke-linejoin="round"/>
+              <rect x="100" y="180" width="100" height="2" stroke="#17181A" stroke-width="1"/>
+              <rect x="130" y="60" width="12" height="30" fill="#F0B429"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3>Canvas Work Jacket</h3>
+            <div class="card-meta"><span class="stencil">S &ndash; XL</span><span class="card-price">&#8377;3,799</span></div>
+            <a class="card-cta" href="mailto:info@destroyermenswear.com?subject=Enquiry%3A%20Canvas%20Work%20Jacket">Enquire <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-media">
+            <span class="tag-no stencil">NO. 006</span>
+            <svg viewBox="0 0 300 375" xmlns="http://www.w3.org/2000/svg">
+              <rect width="300" height="375" fill="#E4DFCF"/>
+              <path d="M112 90 L188 90 L196 120 L182 230 L196 250 L104 250 L118 230 L104 120 Z" fill="none" stroke="#17181A" stroke-width="3" stroke-linejoin="round"/>
+              <line x1="150" y1="90" x2="150" y2="250" stroke="#17181A" stroke-width="1.4" stroke-dasharray="4 5"/>
+              <rect x="122" y="150" width="20" height="24" fill="none" stroke="#17181A" stroke-width="2"/>
+              <rect x="158" y="150" width="20" height="24" fill="none" stroke="#17181A" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3>Combat Cargo Shorts</h3>
+            <div class="card-meta"><span class="stencil">28 &ndash; 36</span><span class="card-price">&#8377;1,899</span></div>
+            <a class="card-cta" href="mailto:info@destroyermenswear.com?subject=Enquiry%3A%20Combat%20Cargo%20Shorts">Enquire <span class="arrow">&rarr;</span></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="display">What customers say</h2>
+        <span class="stencil">4.8 / 5 &mdash; 200+ REVIEWS</span>
+      </div>
+      <div class="review-grid">
+
+        <div class="review-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="quote">"The overshirt is the heaviest cotton I've owned at this price. Fit exactly like the size chart said it would."</p>
+          <div class="review-who">
+            <span class="name">Rohan Mehta</span>
+            <span class="loc">Mumbai</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="quote">"Bought the cargo pants for work and they've held up through two years of daily wear. Stitching hasn't budged."</p>
+          <div class="review-who">
+            <span class="name">Aditya Nair</span>
+            <span class="loc">Pune</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+          <p class="quote">"Great jacket, runs slightly large so size down. Customer service sorted an exchange within a day."</p>
+          <div class="review-who">
+            <span class="name">Karan Shah</span>
+            <span class="loc">Bengaluru</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <h2 class="display">Visit or write to us</h2>
+        <p class="lede">Come try things on, or reach out directly — we reply to every message ourselves.</p>
+
+        <div class="info-row">
+          <span class="k stencil">EMAIL</span>
+          <span class="v"><a href="mailto:info@destroyermenswear.com">info@destroyermenswear.com</a></span>
+        </div>
+        <div class="info-row">
+          <span class="k stencil">STORE</span>
+          <span class="v">12 Linking Road, Bandra West, Mumbai 400050, India</span>
+        </div>
+        <div class="info-row">
+          <span class="k stencil">HOURS</span>
+          <span class="v">Mon&ndash;Sat, 11:00&ndash;20:00</span>
+        </div>
+        <div class="info-row">
+          <span class="k stencil">PHONE</span>
+          <span class="v"><a href="tel:+912212345678">+91 22 1234 5678</a></span>
+        </div>
+      </div>
+
+      <div class="map-box">
+        <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="340" fill="#F8F5EE"/>
+          <line x1="0" y1="80" x2="400" y2="80" stroke="#D8D1BE"/>
+          <line x1="0" y1="180" x2="400" y2="180" stroke="#D8D1BE"/>
+          <line x1="0" y1="260" x2="400" y2="260" stroke="#D8D1BE"/>
+          <line x1="90" y1="0" x2="90" y2="340" stroke="#D8D1BE"/>
+          <line x1="230" y1="0" x2="230" y2="340" stroke="#D8D1BE"/>
+          <line x1="320" y1="0" x2="320" y2="340" stroke="#D8D1BE"/>
+          <circle cx="230" cy="180" r="10" fill="#B4472E"/>
+          <path d="M230 150 L246 178 L214 178 Z" fill="#B4472E"/>
+          <text x="200" y="220" font-family="IBM Plex Mono, monospace" font-size="11" fill="#57534A">Linking Road, Bandra West</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>&copy; 2026 Destroyer Menswear</span>
+    <span>
+      <a href="#">Instagram</a>
+      <a href="#">WhatsApp</a>
+      <a href="#top">Back to top</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const nav = document.getElementById('siteNav');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+</script>
+
+</body>
+</html>
